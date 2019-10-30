@@ -73,4 +73,4 @@ RUN ./steamcmd.sh \
   +app_update ${GAME_ID} validate \
   +quit
 
-CMD [ "mono",  "${DIR_GAME}./TestingConsoleApp.exe" ]
+CMD [ "mono",  "${DIR_GAME}/HeadlessClient/Neos.exe" ]
