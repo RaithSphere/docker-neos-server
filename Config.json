@@ -1,0 +1,38 @@
+{
+    "tickRate": 60.0,
+    "usernameOverride": null,
+    "loginCredential": null,
+    "loginPassword": null,
+    "startWorlds": [
+      {
+        "sessionName": null,
+        "description": null,
+        "maxUsers": 32,
+        "accessLevel": "Anyone",
+        "tags": null,
+        "mobileFriendly": false,
+        "loadWorldURL": null,
+        "loadWorldPresetName": "SpaceWorld",
+        "forcePort": null,
+        "keepOriginalRoles": false,
+        "defaultUserRoles": null,
+        "autoInviteUsernames": null,
+        "autoInviteMessage": null,
+        "autoRecover": true,
+        "idleRestartInterval": -1.0,
+        "forcedRestartInterval": -1.0,
+        "saveOnExit": false,
+        "autosaveInterval": -1.0
+      }
+    ],
+    "dataFolder": null,
+    "cacheFolder": null,
+    "allowedUrlHosts": null,
+    "autoSpawnItems": null,
+    "defaultUserRoles" : {
+        "Frooxius" : "Admin", 
+        "Nexulan" : "Builder",
+        "Veer" : "Moderator",
+        "0utsider89" : "Spectator"
+    }
+  }

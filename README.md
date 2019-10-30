@@ -1,5 +1,5 @@
-# SteamCMD with assumed game installation for Docker
+# Docker to run a Headless Neos Client
 
-Uses my [docker-steamcmd](https://github.com/hellodeibu/docker-steamcmd) image. This barebones image is handy if you want to immediately install a specific game using SteamCMD. Simply provide the STEAM_APP_ID environment variable and that's it.
+Based on: hellodeibu/docker-steamcmd
 
-Note: You probable want to use this image as a build stage for your game-specific image, so that you can do additional setup and configuration on top of a downloaded and ready to go game setup.
+I have no idea how to stack container images appropriately to do this so i just made my own dockerfile... yay?
