@@ -13,8 +13,8 @@ ENV \
   DIR_GAME=/opt/game \
   DIR_USER=/opt/user \
   DIR_APP=/opt/app
-  GAME_ID=740250
-  BETA=headless-client
+  GAME_ID=740250 \
+  BETA=headless-client \
   BETA_PASSWORD=GETMEFROMDISCORD
 
 # Start by updating and installing required packages
