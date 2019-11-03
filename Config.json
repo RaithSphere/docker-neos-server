@@ -13,7 +13,7 @@
         "mobileFriendly": false,
         "loadWorldURL": null,
         "loadWorldPresetName": "SpaceWorld",
-        "forcePort": null,
+        "forcePort": 27015,
         "keepOriginalRoles": false,
         "defaultUserRoles": null,
         "autoInviteUsernames": null,

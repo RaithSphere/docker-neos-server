@@ -1,21 +1,18 @@
-  
 FROM mono
 
-LABEL Name=docker-steamcmd Version=1.0.0 Maintainer="Dave Jansen - Pretty Basic"
+LABEL Name=neos-server Version=0.1.0 Maintainer="ProbablePrime"
 
-## Defaults
-# Note: Query Port cannot be between 27020 and 27050 due to Steam using those ports.
-ENV \
-  PORT_STEAM=27015 \
-  STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" \
-  USER_STEAM_ID=1000 \
-  DIR_STEAMCMD=/opt/steamcmd \
-  DIR_GAME=/opt/game \
-  DIR_USER=/opt/user \
-  DIR_APP=/opt/app
-  GAME_ID=740250 \
-  BETA=headless-client \
-  BETA_PASSWORD=GETMEFROMDISCORD
+ARG BETA=headless-client
+ARG BETA_PASSWORD=ICANTSHARETHIS
+ARG STEAMCMD_URL="https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz"
+ARG DIR_STEAMCMD=/opt/steamcmd
+ARG DIR_GAME=/opt/game
+ARG DIR_USER=/opt/user
+ARG DIR_APP=/opt/app
+ARG GAME_ID=740250
+ARG USER_STEAM_ID=1000
+ARG USERNAME
+ARG PASSWORD
 
 # Start by updating and installing required packages
 RUN set -ex; \
@@ -56,21 +53,16 @@ RUN \
 USER steam
 WORKDIR ${DIR_STEAMCMD}
 
-# Announce the default Steam ports
-# Note: You should open game-specific port too.
-EXPOSE ${PORT_STEAM}/udp
-
 # Optional: Initial run with anonymous login
 # Run SteamCMD to finalize installation — Disable this if you run this on something like Docker Hub as it will fail
 RUN [ "./steamcmd.sh", "+@NoPromptForPassword 1", "+login anonymous",  "+quit" ]
 
 RUN ./steamcmd.sh \
-  -beta ${BETA} \
-  -beatapassword ${BETA_PASSWORD} \
-  +@NoPromptForPassword 1 \
-  +login anonymous \
+  +login ${USERNAME} ${PASSWORD} \
   +force_install_dir ${DIR_GAME} \
-  +app_update ${GAME_ID} validate \
+  +app_update ${GAME_ID}\
+  -beta ${BETA}\
+  -betapassword ${BETA_PASSWORD}\
   +quit
-
-CMD [ "mono",  "${DIR_GAME}/HeadlessClient/Neos.exe" ]
+#Cannot open assembly '${DIR_GAME}/HeadlessClient/Neos.exe': No such file or directory.
+ENTRYPOINT [ "mono",  "${DIR_GAME}/Neos.exe" ]
