@@ -1,6 +1,6 @@
 FROM mono
 
-LABEL Name=neos-server Version=1.0.1 Maintainer="RaithSphere"
+LABEL Name=neos-server Version=1.0.2 Maintainer="RaithSphere"
 
 ARG BETA=headless-client
 ARG BETA_PASSWORD=ICANTSHARETHIS
@@ -19,7 +19,7 @@ ARG PASSWORD
 RUN set -ex; \
     apt-get -y update; \
     apt-get -y upgrade; \
-    apt-get install -y curl lib32gcc1; \
+    apt-get install -y curl lib32gcc1 nano vi htop; \
     rm -rf /var/lib/{apt,dpkg,cache,log}/;
   
 # Create a user and usergroup for Steam, and adjust open file limitations.
