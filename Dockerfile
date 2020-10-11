@@ -19,7 +19,7 @@ ARG PASSWORD
 RUN set -ex; \
     apt-get -y update; \
     apt-get -y upgrade; \
-    apt-get install -y curl lib32gcc1 nano htop; \
+    apt-get install -y curl lib32gcc1 nano htop sudo procps; \
     rm -rf /var/lib/{apt,dpkg,cache,log}/;
   
 # Create a user and usergroup for Steam, and adjust open file limitations.
@@ -41,7 +41,9 @@ RUN \
   cd $DIR_STEAMCMD; \
   curl -sqL ${STEAMCMD_URL} | tar zxfv -; \
   chown -R steam:steam ${DIR_STEAMCMD} ${DIR_GAME} ${DIR_USER} ${DIR_APP};
-  
+
+RUN echo "steam ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
+
 USER steam
 WORKDIR ${DIR_STEAMCMD}
 
