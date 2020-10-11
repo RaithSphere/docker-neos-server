@@ -19,7 +19,7 @@ ARG PASSWORD
 RUN set -ex; \
     apt-get -y update; \
     apt-get -y upgrade; \
-    apt-get install -y curl lib32gcc1 nano vi htop; \
+    apt-get install -y curl lib32gcc1 nano htop; \
     rm -rf /var/lib/{apt,dpkg,cache,log}/;
   
 # Create a user and usergroup for Steam, and adjust open file limitations.
