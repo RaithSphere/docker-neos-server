@@ -1,6 +1,6 @@
 FROM mono
 
-LABEL Name=neos-server Version=0.1.0 Maintainer="ProbablePrime"
+LABEL Name=neos-server Version=1.0.1 Maintainer="RaithSphere"
 
 ARG BETA=headless-client
 ARG BETA_PASSWORD=ICANTSHARETHIS
@@ -14,13 +14,14 @@ ARG USER_STEAM_ID=1000
 ARG USERNAME
 ARG PASSWORD
 
+
 # Start by updating and installing required packages
 RUN set -ex; \
-  apt-get -y update; \
-  apt-get -y upgrade; \
-  apt-get install -y curl lib32gcc1; \
-  rm -rf /var/lib/{apt,dpkg,cache,log}/;
-
+    apt-get -y update; \
+    apt-get -y upgrade; \
+    apt-get install -y curl lib32gcc1; \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/;
+  
 # Create a user and usergroup for Steam, and adjust open file limitations.
 # This is required for certain games, so let's set it by default
 RUN \
@@ -40,21 +41,11 @@ RUN \
   cd $DIR_STEAMCMD; \
   curl -sqL ${STEAMCMD_URL} | tar zxfv -; \
   chown -R steam:steam ${DIR_STEAMCMD} ${DIR_GAME} ${DIR_USER} ${DIR_APP};
-
-# Adjust open file limitations
-# TODO: Check if we need all three methods or if one of them is enough.
-# RUN set -ex; \
-# 	ulimit -n 100000; \
-# 	sysctl -w fs.file-max=100000; \
-# 	echo "session required pam_limits.so" >> /etc/pam.d/common-session;
-
-
-# Make sure everything is run as the Steam user from the steam dir
+  
 USER steam
 WORKDIR ${DIR_STEAMCMD}
 
-# Optional: Initial run with anonymous login
-# Run SteamCMD to finalize installation — Disable this if you run this on something like Docker Hub as it will fail
+
 RUN [ "./steamcmd.sh", "+@NoPromptForPassword 1", "+login anonymous",  "+quit" ]
 
 RUN ./steamcmd.sh \
@@ -64,5 +55,5 @@ RUN ./steamcmd.sh \
   -beta ${BETA}\
   -betapassword ${BETA_PASSWORD}\
   +quit
-#Cannot open assembly '${DIR_GAME}/HeadlessClient/Neos.exe': No such file or directory.
-ENTRYPOINT [ "mono",  "${DIR_GAME}/Neos.exe" ]
+WORKDIR /opt/game
+ENTRYPOINT [ "mono",  "Neos.exe" ]

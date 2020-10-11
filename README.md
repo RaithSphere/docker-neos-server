@@ -1,8 +1,6 @@
 # Docker to run a Headless Neos Client
 
-Based on: hellodeibu/docker-steamcmd
-
-I have no idea how to stack container images appropriately to do this so i just made my own dockerfile... yay?
+Based on: hellodeibu/docker-steamcmd and ProbablePrime/docker-neos-server
 
 # Setup
 
@@ -12,7 +10,7 @@ I have no idea how to stack container images appropriately to do this so i just 
 4. Once you have the password you'll need to build a Docker image, I can't share a built image at this time. To build it run:
 ```
 docker build \
--t probableprime/neos-server \
+-t raithsphere/neos-server \
 --build-arg USERNAME=<Steamusername> \
 --build-arg PASSWORD=<SteamPassword> \
 --build-arg BETA_PASSWORD=<BETAPASSWORD> \
